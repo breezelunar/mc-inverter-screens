@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Home - Inverter Screen App</title>
+</head>
+
+<body>
+    <div class="homepage">
+        <h1 class="homepage-title">SELECT MODE</h1>
+        <div class="images-container">
+            {% for mode in modes %}
+            <div class="image-box">
+                <div class="description">{{ mode.description }}</div>
+                <a href="{{ url_for('show_mode_screens', mode_name=mode.name) }}">
+                    <img src="{{ url_for('static', filename=mode.image) }}" width="500px">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

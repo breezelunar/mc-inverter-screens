@@ -1,0 +1,109 @@
+/* Base styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle, rgba(135,206,250,1) 0%, rgba(100,149,237,1) 50%, rgba(70,130,180,1) 100%);
+    height: 100%;  /* Added to stretch the body and html to full viewport height */
+    display: flex; /* Flex properties will help center its children */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+body > a {
+    /* Removing any absolute positioning for the anchor tags */
+    z-index: 10;  /* To ensure it's above other elements if any overlaps occur */
+}
+
+/* Dynamic background for the homepage */
+.homepage {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Style the container to place images horizontally */
+.images-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    gap: 2rem;
+}
+
+/* Style individual image box */
+.image-box {
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.image-box .description {
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+    font-size: 16px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Hover effect: Increase size and apply a blue glow */
+.image-box:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(0, 0, 255, 0.5);
+}
+
+/* Ensure images fit within the container */
+.image-box img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.homepage-title {
+    text-align: center;
+    color: white;
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 40px;
+    margin-top: -100px;
+}
+
+#displayed-image {
+    position: relative; /* Making it relative so the child absolute positions refer to this */
+    width: auto;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the main image */
+    max-width: 95%; /* Adjust as necessary */
+}
+
+.navigation-arrow {
+    margin: 0;  /* Removing the margin for now */
+    cursor: pointer;
+    width: 50px;
+    position: absolute;  /* This will take it out of the normal document flow */
+}
+
+/* Position arrows relative to #displayed-image */
+#left-arrow {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%); /* Centering vertically */
+}
+
+#right-arrow {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%); /* Centering vertically */
+}
+
+/* For the back arrow on the top left */
+body > a:first-of-type { /* Targeting only the first anchor directly under body, which is your back arrow */
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}

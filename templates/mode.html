@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='icons/back_arrow.png') }}" width="30px"></a>
+    <div id="displayed-image">
+        <img src="{{ url_for('static', filename='icons/left_arrow.png') }}" class="navigation-arrow" id="left-arrow" onclick="navigateScreens(-1)">
+        <img src="{{ url_for('static', filename=screens[0].image) }}" width="600px" onclick="handleScreenClick()">
+        <img src="{{ url_for('static', filename='icons/right_arrow.png') }}" class="navigation-arrow" id="right-arrow" onclick="navigateScreens(1)">
+    </div>
+
+    <script>
+        let currentScreenIndex = 0;
+        const screens = {{ screens|tojson|safe }};
+        const subsetScreens = Object.keys({{ subset_screens[mode_name]|tojson|safe }}).map(Number);  // Get keys as integers
+    
+        function navigateScreens(direction) {
+            currentScreenIndex += direction;
+    
+            if (currentScreenIndex < 0) {
+                currentScreenIndex = screens.length - 1;
+            } else if (currentScreenIndex >= screens.length) {
+                currentScreenIndex = 0;
+            }
+    
+            document.querySelector('#displayed-image > img:nth-child(2)').src = "{{ url_for('static', filename='') }}" + screens[currentScreenIndex].image;
+
+        }
+    
+        function handleScreenClick() {
+            // Check if the screen has a subset
+            if (subsetScreens.includes(currentScreenIndex)) {
+                location.href = "{{ url_for('show_subset_screens', mode_name=mode_name, screen_id='') }}" + currentScreenIndex;
+
+
+
+            } else {
+                console.log("No subset found for screen index:", currentScreenIndex);
+            }
+        }
+    </script>
+    
+</body>
+
+</html>
